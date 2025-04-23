@@ -1,6 +1,6 @@
 ## Context
 
-Using the meta framework of your choice (NextJS, SvelteKit, etc), perform the following tasks. If you discover any anomalies, take note of them and let us know 😉
+Using the meta framework of your choice (NextJS, SvelteKit, etc), perform the following tasks. If you discover any anomalies, take note of them and let us know 😉 Please note that you are encouraged to use AI productivity tools such as Cursor and GitHub Copilot.
 
 ## Task 1
 
