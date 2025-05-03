@@ -39,7 +39,7 @@ export const GET = async ({ url, cookies }) => {
 			return new Response('No access token or id token found', { status: 400 });
 		}
 		// Validate tokens
-		await validateJwt(idToken);
+		await Promise.all([validateJwt(idToken), validateJwt(accessToken)]);
 		// Store access token in cookies
 		cookies.set(COOKIE_ACCESS_TOKEN, accessToken, {
 			...baseCookieOptions,
