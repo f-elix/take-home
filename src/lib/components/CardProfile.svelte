@@ -31,9 +31,13 @@
 
 <article class="@container flex flex-col gap-6 rounded-lg border border-gray-200 p-6">
 	<div class="flex flex-col items-center justify-center gap-10 @sm:flex-row">
-		<div class="size-16 shrink-0 overflow-hidden rounded-full bg-gray-200">
+		<div class="grid-stack grid size-16 shrink-0 overflow-hidden rounded-full bg-gray-200">
+			<div class="flex size-full flex-col items-center">
+				<div class="size-1/2 shrink-0 translate-y-1/5 rounded-full bg-gray-700"></div>
+				<div class="size-full shrink-0 rounded-full bg-gray-700"></div>
+			</div>
 			{#if profilePicture}
-				<img src={profilePicture} alt="" class="size-full object-cover" />
+				<img src={profilePicture} alt="" class="z-0 size-full object-cover" />
 			{/if}
 		</div>
 		{#if name || username}
