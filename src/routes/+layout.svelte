@@ -9,7 +9,7 @@
 
 <div class="flex h-screen flex-col">
 	<header class="flex items-center justify-between gap-4 border-b border-gray-700 bg-gray-800 p-4">
-		<h1 class="font-medium">Felix Guerin - Take home</h1>
+		<a href="/" class="font-medium">Felix Guerin - Take home</a>
 		{#if user}
 			<form action="/api/auth/logout" method="POST">
 				<button>Logout</button>
