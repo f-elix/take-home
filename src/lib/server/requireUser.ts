@@ -4,9 +4,9 @@ import { getUserFromCookies } from '$lib/server/getUserFromCookies';
 import { error, redirect } from '@sveltejs/kit';
 
 export const requireUser = async () => {
-	const user = await getUserFromCookies();
-	if (user) {
-		return user;
+	const userData = await getUserFromCookies();
+	if (userData?.user) {
+		return userData;
 	}
 	// If not user found, clear cookies and redirect to login
 	clearUserCookies();

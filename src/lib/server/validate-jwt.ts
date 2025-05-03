@@ -1,42 +1,44 @@
-import jwt from "jsonwebtoken";
-import jwkToPem from "jwk-to-pem";
+import jwt from 'jsonwebtoken';
+import jwkToPem from 'jwk-to-pem';
 
 interface JWKS {
-  keys: Array<{
-    kty: "RSA";
-    use: string;
-    kid: string;
-    x5c: string[];
-    n: string;
-    e: string;
-  }>;
+	keys: Array<{
+		kty: 'RSA';
+		use: string;
+		kid: string;
+		x5c: string[];
+		n: string;
+		e: string;
+	}>;
 }
 
 async function getPublicKey() {
-  const response = await fetch(
-    "https://dev-axjtf077.us.auth0.com/.well-known/jwks.json"
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch public key");
-  }
-  const jwks: JWKS = await response.json();
+	const response = await fetch('https://dev-axjtf077.us.auth0.com/.well-known/jwks.json');
+	if (!response.ok) {
+		throw new Error('Failed to fetch public key');
+	}
+	const jwks: JWKS = await response.json();
 
-  const signingKey = jwks.keys.find((key) => key.use === "sig");
-  if (!signingKey) {
-    throw new Error("No signing key found in JWKS");
-  }
+	const signingKey = jwks.keys.find((key) => key.use === 'sig');
+	if (!signingKey) {
+		throw new Error('No signing key found in JWKS');
+	}
 
-  return jwkToPem(signingKey);
+	return jwkToPem(signingKey);
 }
 
 export async function validateJwt(token: string) {
-  const publicKey = await getPublicKey();
-  const decoded = jwt.verify(token, publicKey, {
-    algorithms: ["RS256", "HS256"],
-  }) as jwt.JwtPayload;
+	const publicKey = await getPublicKey();
+	const decoded = jwt.verify(token, publicKey, {
+		algorithms: ['RS256', 'HS256']
+	}) as jwt.JwtPayload;
 
-  return {
-    name: decoded.name || decoded.sub,
-    email: decoded.email,
-  };
+	return {
+		name: decoded.name,
+		email: decoded.email,
+		// Change from original implementation to explicitly return the sub field
+		// since this function is used to validate both access and id tokens
+		// which have different payloads.
+		sub: decoded.sub
+	};
 }
