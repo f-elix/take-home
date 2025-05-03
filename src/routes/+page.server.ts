@@ -1,3 +1,4 @@
+import { getUserFriends } from '$lib/server/getUserFriends';
 import { getUserProfile } from '$lib/server/getUserProfile';
 import { requireUser } from '$lib/server/requireUser';
 
@@ -7,6 +8,7 @@ export const load = async () => {
 	const profile = await getUserProfile(userId, accessToken);
 	return {
 		user,
-		profile
+		profile,
+		friends: getUserFriends(accessToken)
 	};
 };
