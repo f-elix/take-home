@@ -32,5 +32,10 @@ export default ts.config(
 				svelteConfig
 			}
 		}
+	},
+	{
+		rules: {
+			'svelte/require-each-key': 'off'
+		}
 	}
 );

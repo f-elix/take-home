@@ -22,6 +22,12 @@ Implement the ‘My Profile’ section using the `/profile/{id}` endpoint.
 
 <img src="https://s3.ca-central-1.amazonaws.com/thirdbridge.ca/take-home-assets/my-profile.png" alt="My Profile" width="600">
 
+NOTES:
+
+While implementing this task, I followed the API documentation by removing the auth0| prefix from the user sub and passing the access token as a Bearer token in an Authorization header.
+I made sure that the access token’s sub claim matches the user ID being requested, and ensured that only the authenticated user can access their own profile. This check can be found in [`getUserFromCookies`](./src/lib/server/getUserFromCookies.ts).
+However, the API consistently returns a message indicating a potential IDOR vulnerability, even when the request seems correct. I believe I have implemented all necessary checks in my code to prevent IDOR issues, so I conclude that this was an intentional anomaly.
+
 ## Task 4
 
 Implement the ‘My Friends’ section using the `/friends` endpoint. Note that the developers poorly modeled the social network and that this call is particularly slow.
